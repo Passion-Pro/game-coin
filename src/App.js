@@ -7,10 +7,10 @@ import { actionTypes } from './reducer';
 import { useStateValue } from './StateProvider';
 import { useEffect } from 'react';
 import Loginwithsignin from './components/Login/Loginwithsignin';
+import Profile from './components/Login/Profile'
 
 function App() {
   const [{ user, userInfo, showPop, showPopIn }, dispatch] = useStateValue();
-  // const history = useHistory();
 
   console.log("first", showPop, showPopIn)
 
@@ -65,6 +65,9 @@ function App() {
                 )
                 :
                 <>
+                  <Route exact path="/userProfile">
+                    {user?.email ? <Profile /> : <Loginwithsignin />}
+                  </Route>
                   <Route exact path="/">
                     {user?.email ? <Home /> : <Loginwithsignin />}
                   </Route>

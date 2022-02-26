@@ -7,104 +7,110 @@ import CloseIcon from "@mui/icons-material/Close";
 import styled from "styled-components";
 import { useStateValue } from '../../StateProvider';
 import firebase from 'firebase';
+import Avatar from "@mui/material/Avatar";
 
 function Header() {
-    const [{ userInfo, user }] = useStateValue();
-    const [showSearch, setShowSearch] = useState(false);
-    const history = useHistory();
-    const signupimage = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIOUxxjs2jzo7X6iOYOBKWDzVhPkx0dxK8w&usqp=CAU`;
-    const [showAddAdvice, setShowAddAdvice] = useState(false);
-    const [advice, setAdvice] = useState('');
-    const [adviceHead, setAdviceHead] = useState('');
+  const [{ userInfo, user }] = useStateValue();
+  const [showSearch, setShowSearch] = useState(false);
+  const history = useHistory();
+  const signupimage = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyIOUxxjs2jzo7X6iOYOBKWDzVhPkx0dxK8w&usqp=CAU`;
+  const [showAddAdvice, setShowAddAdvice] = useState(false);
+  const [advice, setAdvice] = useState('');
+  const [adviceHead, setAdviceHead] = useState('');
 
-    var today = new Date();
-    var date = today.toLocaleString();
+  var today = new Date();
+  var date = today.toLocaleString();
 
-    const addAdvice = () => {
-        if (userInfo?.passion) {
-            db.collection(userInfo?.passion).doc('Csb15iOnGedmpceiQOhX').collection('advice').add({
-                date: date,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                advice: advice,
-                adviceHead: adviceHead,
-                name: userInfo?.name,
-                email: user?.email,
-                passion:userInfo?.passion,
-            }).then(()=>{
-                setShowAddAdvice(false)
-            })
-        } else {
-            alert('Something went wrong');
-        }
+  const addAdvice = () => {
+    if (userInfo?.passion) {
+      db.collection(userInfo?.passion).doc('Csb15iOnGedmpceiQOhX').collection('advice').add({
+        date: date,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        advice: advice,
+        adviceHead: adviceHead,
+        name: userInfo?.name,
+        email: user?.email,
+        passion: userInfo?.passion,
+      }).then(() => {
+        setShowAddAdvice(false)
+      })
+    } else {
+      alert('Something went wrong');
     }
-    return (
-        <div className='header' >
-            {showAddAdvice && (
-                <Container>
-                    <div className="addLearning">
-                        <div className="add_learning_header">
-                            <CloseIcon className="close_icon"
-                                onClick={() => {
-                                    setShowAddAdvice(false)
-                                }}
-                            />
-                        </div>
-                        <div className="group_photo">
-                            <div className="learning_detail" style={{flexDirection:'column'}}>
-                                <textarea 
-                                    style={{
-                                        resize: 'none',
-                                        outline: 'none',
-                                        border: '1px solid lightblue',
-                                        padding: '2%',
-                                        margin: '2% 0',
-                                        width:'94%',
-                                        height: '50px',
-                                        borderRadius:'6px',
-                                    }}
-                                    type="text"
-                                    placeholder="Advice heading"
-                                    maxlength="70"
-                                    onChange={e => setAdviceHead(e.target.value)}
-                                />
-                                <textarea 
-                                    style={{
-                                        resize: 'none',
-                                        outline: 'none',
-                                        border: '1px solid lightblue',
-                                        padding: '2%',
-                                        margin: '2% 0',
-                                        width:'94%',
-                                        height: '300px',
-                                        borderRadius:'6px',
-                                    }}
-                                    type="text"
-                                    placeholder="Advice"
-                                    maxlength="70"
-                                    onChange={e => setAdvice(e.target.value)}
-                                />
-                            </div>
-                            <div className="start_button">
-                                <button onClick={addAdvice} >Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </Container>
-            )}
-            <div className="header_In">
-                <div className="header__Logo">
-                    Game Coin
-                </div>
-                <div className="header__Icons">
-                    <div className="header__Icon__search">
-                    </div>
-                </div>
-              {/* <div className="header__profile">
-                  {!user?.email && <button onClick={() => history.push('/signin')}>Sign In</button>}
-              </div>  */}
+  }
+  return (
+    <div className='header' >
+      {showAddAdvice && (
+        <Container>
+          <div className="addLearning">
+            <div className="add_learning_header">
+              <CloseIcon className="close_icon"
+                onClick={() => {
+                  setShowAddAdvice(false)
+                }}
+              />
             </div>
+            <div className="group_photo">
+              <div className="learning_detail" style={{ flexDirection: 'column' }}>
+                <textarea
+                  style={{
+                    resize: 'none',
+                    outline: 'none',
+                    border: '1px solid lightblue',
+                    padding: '2%',
+                    margin: '2% 0',
+                    width: '94%',
+                    height: '50px',
+                    borderRadius: '6px',
+                  }}
+                  type="text"
+                  placeholder="Advice heading"
+                  maxlength="70"
+                  onChange={e => setAdviceHead(e.target.value)}
+                />
+                <textarea
+                  style={{
+                    resize: 'none',
+                    outline: 'none',
+                    border: '1px solid lightblue',
+                    padding: '2%',
+                    margin: '2% 0',
+                    width: '94%',
+                    height: '300px',
+                    borderRadius: '6px',
+                  }}
+                  type="text"
+                  placeholder="Advice"
+                  maxlength="70"
+                  onChange={e => setAdvice(e.target.value)}
+                />
+              </div>
+              <div className="start_button">
+                <button onClick={addAdvice} >Add</button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      )}
+      <div className="header_In">
+        <div className="header__Logo">
+          Game Coin
         </div>
-    )
+        <div className="header__Icons">
+          <div className="header__Icon__search">
+          </div>
+        </div>
+        {userInfo && <div className="Loginheader__profile" onClick={() => {
+          history.push('/userProfile')
+        }}>
+          <Avatar src={userInfo?.profilePhotoUrl} style={{height:"30px",width:"30px"}} />
+          <span className='Loginheader_profileName'>
+            {userInfo?.name && userInfo?.name?.length > 9 ? userInfo?.name.slice(0, 9) + '...' : userInfo?.name}
+          </span>
+        </div>}
+      </div>
+    </div>
+  )
 }
 
 export default Header;
