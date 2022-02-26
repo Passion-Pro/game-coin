@@ -7,6 +7,8 @@ import { actionTypes } from './reducer';
 import { useStateValue } from './StateProvider';
 import { useEffect } from 'react';
 import Loginwithsignin from './components/Login/Loginwithsignin';
+import PlayPage from './components/play/PlayPage';
+
 import Profile from './components/Login/Profile'
 import Help from  './components/Help/Help'
 
@@ -66,6 +68,9 @@ function App() {
                 )
                 :
                 <>
+                  <Route exact path="/play">
+                    {user?.email ? <PlayPage/> : <Loginwithsignin />}
+                    </Route>
                   <Route exact path="/help">
                     {user?.email ? <Help /> : <Loginwithsignin />}
                   </Route>
