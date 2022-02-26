@@ -2,12 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import Avatar from "@mui/material/Avatar";
 
-function Name({ data , from }) {
-
+function Name({ data,serial }) {
   return (
     <Container>
+      <div className="ProName">
+      <p className="rank">{serial+1}</p>
       <Avatar className="student_avatar" src={data?.data?.profilePhotoUrl} />
-      <p className="name">{data?.data?.name}</p>
+      <p className="name">{data?.data?.name.length>7 ?data?.data?.name.splice(0,7):data?.data?.name}</p>
+      
+      </div>
+      <div className="preference_div">
+        <p className="preference">{data?.data?.TotalMatch}</p>
+      </div>
+      <div className="preference_div">
+        <p className="preference">{data?.data?.TotalWon}</p>
+      </div>
       <div className="preference_div">
         <p className="preference">{data?.data?.coin}</p>
       </div>
@@ -17,42 +26,49 @@ function Name({ data , from }) {
 
 const Container = styled.div`
   display: flex;
-  padding: 10px;
+  flex: 1;
   border: 1px solid lightgray;
-  margin-left: 10px;
-  width: 30%;
+  align-items: center;
+  width: 94vw;
   background-color: #fff;
-  min-width: 400px;
+  max-width: 600px;
+  justify-content: space-around;
 
-  @media (max-width: 500px) {
-    width: 90%;
-    min-width: 90%;
-    margin-left: 0 !important;
+  .ProName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:30%;
+    justify-content: flex-start;
   }
-
+  .rank{
+    padding-right: 5px;
+    font-size: large;
+    font-weight: bold;
+  }
   .student_avatar {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    margin: 4px;
   }
 
   .name {
-    margin-left: 20px;
+    margin-left: 5px;
+    font-style: italic;
+    font-weight: bold;
   }
 
   .preference_div {
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
+    flex:0.2;
     p {
-      background-color: #f11717;
-      width: 170px;
+      padding: 4px 0;
+      background-color: #0a0975;
+      width: 100%;
       text-align: center;
       color: white;
-      padding-top: 7px;
-      padding-bottom: 7px;
       border-radius: 20px;
-      margin-bottom: auto;
-      margin-top: auto;
+      margin: 2px;
     }
   }
 `;

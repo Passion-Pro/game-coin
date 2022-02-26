@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Header.css';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
-import Avatar from "@mui/material/Avatar";
 
 function Header() {
     const [{ userInfo }, dispatch] = useStateValue();

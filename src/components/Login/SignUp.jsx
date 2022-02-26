@@ -31,7 +31,10 @@ console.log(user)
                         name: name,
                         email: user?.email,
                         coin: 5,
-                        user: user?.uid
+                        user: user?.uid,
+                        photoURL:user?.photoURL,
+                        TotalMatch:0,
+                        TotalWon:0,
                     }).then(() => {
                         alert('Your account create successfully.')
                         setLoading(false);

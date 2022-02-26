@@ -9,10 +9,11 @@ import { useEffect } from 'react';
 import Loginwithsignin from './components/Login/Loginwithsignin';
 import PlayPage from './components/play/PlayPage';
 
+import Profile from './components/Login/Profile'
+import Help from  './components/Help/Help'
 
 function App() {
   const [{ user, userInfo, showPop, showPopIn }, dispatch] = useStateValue();
-  // const history = useHistory();
 
   console.log("first", showPop, showPopIn)
 
@@ -69,6 +70,12 @@ function App() {
                 <>
                   <Route exact path="/play">
                     {user?.email ? <PlayPage/> : <Loginwithsignin />}
+                    </Route>
+                  <Route exact path="/help">
+                    {user?.email ? <Help /> : <Loginwithsignin />}
+                  </Route>
+                  <Route exact path="/userProfile">
+                    {user?.email ? <Profile /> : <Loginwithsignin />}
                   </Route>
                   <Route exact path="/">
                     {user?.email ? <Home /> : <Loginwithsignin />}
@@ -89,5 +96,3 @@ function App() {
 }
 
 export default App;
-
-

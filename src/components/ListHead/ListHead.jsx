@@ -3,19 +3,20 @@ import styled from "styled-components";
 import Name from './Name';
 
 
-function ListPage({data ,serial}) {
+function ListHead({data}) {
   const[preference , setPreference] = useState("Preferences");
 
   return (
     <Container>
       <div className="list">
-        <Name data={data} serial={serial}/>
+        <Name data={data}/>
     </div>    
     </Container>
   )
 };
 
 const Container = styled.div`
+font-weight:bold;
 .list{
     display : flex;
     flex-direction : column;
@@ -47,4 +48,4 @@ const Container = styled.div`
 
 `
 
-export default ListPage
+export default ListHead
