@@ -3,6 +3,7 @@ import './HeaderSecond.css';
 import { useHistory } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
 import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 
 function HeaderSecond() {
     const [{ user, courseDiv, showExpandGroup, showMoreoption }, dispatch] = useStateValue();
@@ -11,7 +12,7 @@ function HeaderSecond() {
 
     return (
         <>
-            
+
             <div className='HeaderSecond_Out'>
                 <div className='HeaderSecond'>
                     <div></div>
@@ -26,7 +27,13 @@ function HeaderSecond() {
                             history.push('/help')
                             setPathName('/help')
                         }} className={window.location.pathname == '/help' ? "followingCard__active" : "followingCard"}>
-                            Help{' '} <HelpOutlineRoundedIcon fontSize='small'/>
+                            Help{' '} <HelpOutlineRoundedIcon fontSize='small' />
+                        </div>
+                        <div onClick={() => {
+                            history.push('/playpage')
+                            setPathName('/playpage')
+                        }} className={"followingCard__button"}>
+                            PLAY{' '} <PlayArrowRoundedIcon fontSize='small' />
                         </div>
                     </div>
                 </div>

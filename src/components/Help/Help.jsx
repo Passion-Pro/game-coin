@@ -1,6 +1,6 @@
 import React from 'react';
 import './Help.css'
-import Header from '../Header/Header';
+import Header from '../Login/Header';
 import HeaderSecond from '../Header/HeaderSecond';
 
 function Help() {
