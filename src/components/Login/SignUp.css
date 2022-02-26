@@ -5,21 +5,31 @@
     justify-content: center;
 
 }
+/* .ProfileName{
+    display: flex;
+    padding: 12px;
+} */
 .signUp_in{
     display: flex;
     width: 100%;
     max-width: 400px;
     align-items: center;
     flex-direction:  column;
-    /* background-color: rgb(235, 231, 231); */
     border : 1px solid lightgray;
     border-radius:  10px;
     margin-top : 10px;
-    /* justify-content:  center; */
-    /* padding: 12px; */
     height: 100%;
 }  
-
+.ProfileName{
+    display: flex;
+    font-weight: bold;
+    color: rgb(35, 13, 133);
+    padding: 8px;
+}
+.ProfileName>div{
+    color: black;
+    padding-right: 8px;
+}
 @media(max-width : 500px){
     .signUp_in{
         margin-top : 0

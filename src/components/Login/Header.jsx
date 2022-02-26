@@ -93,7 +93,9 @@ function Header() {
         </Container>
       )}
       <div className="header_In">
-        <div className="header__Logo">
+        <div className="header__Logo" onClick={()=>{
+          history.push('/')
+        }}>
           Game Coin
         </div>
         <div className="header__Icons">

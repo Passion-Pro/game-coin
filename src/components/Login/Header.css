@@ -135,9 +135,6 @@
         padding: 0px 0px 0 4px;
         width: 100%;
     }
-    .header__profile{
-        /* flex:.3; */
-    }
     .header__profile>button{
         font-size: small;
         width: fit-content;
