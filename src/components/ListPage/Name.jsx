@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Avatar from "@mui/material/Avatar";
 
-function Name({ data }) {
+function Name({ data , from }) {
+
   return (
     <Container>
       <Avatar className="student_avatar" src={data?.data?.profilePhotoUrl} />

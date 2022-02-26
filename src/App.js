@@ -7,6 +7,8 @@ import { actionTypes } from './reducer';
 import { useStateValue } from './StateProvider';
 import { useEffect } from 'react';
 import Loginwithsignin from './components/Login/Loginwithsignin';
+import PlayPage from './components/play/PlayPage';
+
 
 function App() {
   const [{ user, userInfo, showPop, showPopIn }, dispatch] = useStateValue();
@@ -65,6 +67,9 @@ function App() {
                 )
                 :
                 <>
+                  <Route exact path="/play">
+                    {user?.email ? <PlayPage/> : <Loginwithsignin />}
+                  </Route>
                   <Route exact path="/">
                     {user?.email ? <Home /> : <Loginwithsignin />}
                   </Route>
@@ -86,39 +91,3 @@ function App() {
 export default App;
 
 
-{/* <Route path="/signup">
-<SignUp />
-</Route>
-<Route path="/update">
-<UpdateUserProfile />
-</Route>
-<Route path="/userProfile">
-{user?.email ? <UserProfile /> : <Loginwithsignin />}
-</Route>
-<Route path="/help">
-{user?.email ? <Help /> : <Loginwithsignin />}
-</Route>
-<Route path="/homepreferedBy">
-{user?.email ? <HomePreferedBy /> : <Loginwithsignin />}
-</Route>
-<Route path="/findvalentine">
-{user?.email ? <FindValentine /> : <Loginwithsignin />}
-</Route>
-<Route path="/public">
-{user?.email ? <Public /> : <Loginwithsignin />}
-</Route>
-<Route path="/chat/:chatId">
-{user?.email ? <HomeChat /> : <Loginwithsignin />}
-</Route>
-<Route exact path="/chat">
-{user?.email ? <HomeChat /> : <Loginwithsignin />}
-</Route>
-<Route exact path="/chatMobile/:chatId">
-{user?.email ? <ChatPage /> : <Loginwithsignin />}
-</Route>
-<Route path="/profilePop/:popId">
-{user?.email ? <ValentinePopUp /> : <Loginwithsignin />}
-</Route>
-<Route path="/signin">
-<Loginwithsignin />
-</Route> */}
