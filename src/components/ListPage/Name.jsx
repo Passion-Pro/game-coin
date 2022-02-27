@@ -8,7 +8,7 @@ function Name({ data,serial }) {
       <div className="ProName">
       <p className="rank">{serial+1}</p>
       <Avatar className="student_avatar" src={data?.data?.profilePhotoUrl} />
-      <p className="name">{data?.data?.name.length>7 ?data?.data?.name.splice(0,7):data?.data?.name}</p>
+      <p className="name">{data?.data?.name.length>7 ?data?.data?.name.slice(0,7)+'...':data?.data?.name}</p>
       
       </div>
       <div className="preference_div">

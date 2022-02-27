@@ -9,11 +9,12 @@ import db from "../../firebase";
 import { useStateValue } from "../../StateProvider";
 
 function PlayPage() {
+  const [{ userInfo, user }] = useStateValue();
+
   const [selectOpponent, setSelectOpponent] = useState(false);
   const [input, setInput] = useState();
   const [users, setUsers] = useState([]);
-  const[opponent , setOpponent] = useState([]);
-  const[{userInfo} , dispatch] = useStateValue();
+  const [opponent, setOpponent] = useState([]);
 
   useEffect(() => {
     db.collection("users").onSnapshot((snapshot) =>
@@ -26,12 +27,59 @@ function PlayPage() {
     );
   }, []);
 
+  const won=()=>{
+   db.collection('users').doc(opponent?.id).update({
+     decision: "won",
+     opponentUid:user?.uid,
+     opponent:userInfo?.name,
+     sendTo:opponent?.data?.name,
+     opponentCoin:userInfo?.coin,
+     opponentWon:userInfo?.TotalWon,
+     opponentMatch:userInfo?.TotalMatch,
+   })
+  //  .then(()=>{
+  //   db.collection('users').doc(user?.uid).update({
+  //     decision: "won",
+  //     opponentUid:opponent?.id,
+  //     opponent:opponent?.data?.name,
+  //     opponentCoin:opponent?.data?.coin,
+  //     opponentWon:opponent?.data?.TotalWon,
+  //     opponentMatch:opponent?.data?.TotalMatch,
+  //   }).then(()=>{
+  //     alert('Sent decision!')
+  //  })
+  //  })
+  }
+
+  const lose=()=>{
+    db.collection('users').doc(opponent?.id).update({
+      decision: "lose",
+      opponentUid:user?.uid,
+      opponent:userInfo?.name,
+      opponentCoin:userInfo?.coin,
+      sendTo:opponent?.data?.name,
+      opponentWon:userInfo?.TotalWon,
+      opponentMatch:userInfo?.TotalMatch,
+    })
+  //   .then(()=>{
+  //     db.collection('users').doc(user?.uid).update({
+  //       decision: "won",
+  //       opponentUid:opponent?.id,
+  //       opponent:opponent?.data?.name,
+  //       opponentCoin:opponent?.data?.coin,
+  //       opponentWon:opponent?.data?.TotalWon,
+  //       opponentMatch:opponent?.data?.TotalMatch,
+  //     }).then(()=>{
+  //       alert('Sent decision!')
+  //    })
+  //  })
+   }
   return (
     <Container>
       <Header />
       <HeaderSecond />
       <div className="content">
-        <PlayerCard data = {userInfo}/>
+        <PlayerCard data={userInfo} />
       </div>
       <div className="opponent">
         {!selectOpponent && (
@@ -58,7 +106,7 @@ function PlayPage() {
             Choose Opponent
           </button>
         )}
-        {selectOpponent && !opponent?.data?.name &&  (
+        {selectOpponent && !opponent?.data?.name && (
           <div className="select_oppponent">
             <div className="search">
               <SearchOutlinedIcon className="searchIcon" />
@@ -71,8 +119,8 @@ function PlayPage() {
               />
             </div>
             <div className="search_results">
-              {/* <Name data={data}/> */}
-              {users && input && 
+              {users &&
+                input &&
                 users
                   .filter((item) => {
                     return item?.data?.name
@@ -80,22 +128,30 @@ function PlayPage() {
                       .includes(input.toLowerCase());
                   })
                   .map((data) => (
-                      <div onClick = {() => {
+                    <div
+                      onClick={() => {
                         setOpponent(data);
-                        console.log("SEt" , data);
-                        
-                      }}>
-                          <Name data={data}/>
-                      </div>
+                        console.log("SEt", data);
+                      }}
+                    >
+                      <Name data={data} />
+                    </div>
                   ))}
             </div>
           </div>
         )}
         {opponent?.data?.name && (
-                <PlayerCard data = {opponent?.data}/>
+          <div className="options">
+            <button disabled={userInfo?.decision} onClick={lose}>I won</button>
+            <button disabled={userInfo?.decision} onClick={won}>I lose</button>
+          </div>
+        )}
+        {opponent?.data?.name && (
+          <>
+            <PlayerCard data={opponent?.data} />
+          </>
         )}
       </div>
-
     </Container>
   );
 }
@@ -114,7 +170,7 @@ const Container = styled.div`
   .opponent {
     display: flex;
     justify-content: center;
-    flex-direction : column;
+    flex-direction: column;
     align-items: center;
 
     button {
@@ -145,6 +201,29 @@ const Container = styled.div`
     .searchIcon {
       color: gray !important;
     }
+  }
+
+  .options{
+    display :flex;
+    justify-content : space-around;
+    margin-top : 10px;
+    margin-bottom : 10px;
+    width : 400px;
+
+    button{
+      border-radius : 20px;
+      padding : 10px;
+      border : 0;
+      width : 100px;
+      background-color : #1357d4;
+      color  : #fff;
+
+      &:hover {
+        cursor : pointer;
+        background-color : #3d78e6;
+      }
+    }
+
   }
 `;
 

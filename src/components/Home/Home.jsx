@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import db from '../../firebase';
-import { useStateValue } from '../../StateProvider';
 import Header from '../Login/Header'
 import HeaderSecond from '../Header/HeaderSecond'
 import ListPage from '../ListPage/ListPage'
@@ -9,11 +8,9 @@ import ListHead from '../ListHead/ListHead';
 
 function Home() {
 
-    const [{ user, userInfo }] = useStateValue();
     const [data, setData] = useState([]);
-    // const [data1, setData1] = useState(["name":'Name',"totalMatch":"totalMatch"]);
     useEffect(() => {
-            db.collection("users").orderBy('coin','asc').onSnapshot((snapshot) => {
+            db.collection("users").orderBy('coin','desc').onSnapshot((snapshot) => {
                 setData(
                     snapshot.docs.map((doc) => ({
                         data: doc.data(),

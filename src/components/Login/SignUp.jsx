@@ -35,6 +35,7 @@ console.log(user)
                         photoURL:user?.photoURL,
                         TotalMatch:0,
                         TotalWon:0,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     }).then(() => {
                         alert('Your account create successfully.')
                         setLoading(false);

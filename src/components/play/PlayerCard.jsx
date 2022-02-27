@@ -14,8 +14,8 @@ function PlayerCard({data}) {
        <div className="player_info">
            <p className = "name">{data?.name}</p>
            <div className="coins">
-               <p>5</p>
                <img src="https://thumbs.dreamstime.com/b/golden-coin-dollar-symbol-isolated-black-background-horizontal-animation-d-render-130174755.jpg" alt="" />
+               <p>{data?.coin}</p>
            </div>
        </div>
        <img src="https://b.kisscc0.com/20180705/yjw/kisscc0-computer-icons-trophy-award-symbol-download-golden-trophy-with-glaze-remix-5b3dc51cdb3f07.494809991530774812898.png" alt="" className="trophy" />
